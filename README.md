@@ -1,8 +1,6 @@
 # Welcome to the Hacktoberfest 2023 Repository!
 
-![Hacktoberfest Logo](./assets/hacktoberfest_wall.png)
 
-## Introduction
 ## Guidelines:
 
 - **No DELETING files** 
