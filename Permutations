@@ -1,0 +1,43 @@
+class Solution {
+public:
+    vector<vector<int>> final;  // Store the final paths
+    
+    // The creator function generates paths in a depth-first manner
+    // Parameters: graph - the directed graph, temp - the current path being constructed
+    void creator(vector<vector<int>>& graph, vector<int> temp) {
+        // If the last node in the current path is the target node (graph.size() - 1),
+        // add the path to the 'final' vector and return.
+        if (temp[temp.size() - 1] == graph.size() - 1) {
+            final.push_back(temp);
+            return;
+        }
+        
+        // If the current path size is equal to the total number of nodes, return.
+        if (temp.size() == graph.size()) {
+            return;
+        }
+        
+        // Get the last node from the current path, which serves as the starting node for the next steps
+        int curr = temp[temp.size() - 1];
+        
+        // Explore all neighbors of the current node
+        for (int i = 0; i < graph[curr].size(); i++) {
+            // Add the next node to the path
+            temp.push_back(graph[curr][i]);
+            
+            // Recursively call the creator function with the updated path
+            creator(graph, temp);
+            
+            // After exploring this neighbor, remove it from the path (backtrack)
+            temp.pop_back();
+        }
+    }
+    
+    // Main function to find all paths from source (node 0) to target (node graph.size() - 1)
+    vector<vector<int>> allPathsSourceTarget(vector<vector<int>>& graph) {
+        // Start the creation of paths from node 0
+        creator(graph, {0});
+        
+        return final;  // Return the list of all paths
+    }
+};
